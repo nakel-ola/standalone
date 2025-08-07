@@ -1,0 +1,150 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+// Multi-tenant SaaS models
+
+// Tenant - represents a company/organization
+// model Tenant {
+//   id        String   @id @default(cuid())
+//   name      String
+//   slug      String   @unique
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   
+//   // Relations
+//   sites     Site[]
+//   users     User[]
+// }
+
+// Site - represents a department/website within a tenant
+// model Site {
+//   id          String   @id @default(cuid())
+//   name        String
+//   slug        String
+//   description String?
+//   isActive    Boolean  @default(true)
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+//   
+//   // Relations
+//   tenantId    String
+//   tenant      Tenant   @relation(fields: [tenantId], references: [id])
+//   pages       Page[]
+//   theme       Theme?
+//   navigation  Navigation?
+//   assets      Asset[]
+//   siteUsers   SiteUser[]
+// }
+
+// Page - represents a page within a site
+// model Page {
+//   id          String   @id @default(cuid())
+//   title       String
+//   slug        String
+//   content     Json?
+//   isPublished Boolean  @default(false)
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+//   
+//   // Relations
+//   siteId      String
+//   site        Site         @relation(fields: [siteId], references: [id])
+//   versions    PageVersion[]
+// }
+
+// PageVersion - for version control of pages
+// model PageVersion {
+//   id        String   @id @default(cuid())
+//   version   Int
+//   content   Json
+//   createdAt DateTime @default(now())
+//   
+//   // Relations
+//   pageId    String
+//   page      Page     @relation(fields: [pageId], references: [id])
+// }
+
+// Theme - site customization settings
+// model Theme {
+//   id        String   @id @default(cuid())
+//   name      String
+//   settings  Json
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   
+//   // Relations
+//   siteId    String   @unique
+//   site      Site     @relation(fields: [siteId], references: [id])
+// }
+
+// Asset - files/images for sites
+// model Asset {
+//   id        String   @id @default(cuid())
+//   name      String
+//   url       String
+//   type      String
+//   size      Int?
+//   createdAt DateTime @default(now())
+//   
+//   // Relations
+//   siteId    String
+//   site      Site     @relation(fields: [siteId], references: [id])
+// }
+
+// Navigation - site navigation structure
+// model Navigation {
+//   id        String   @id @default(cuid())
+//   name      String
+//   structure Json
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   
+//   // Relations
+//   siteId    String   @unique
+//   site      Site     @relation(fields: [siteId], references: [id])
+// }
+
+// User - system users
+// model User {
+//   id        String   @id @default(cuid())
+//   email     String   @unique
+//   name      String?
+//   role      UserRole @default(NORMAL)
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   
+//   // Relations
+//   tenantId  String?
+//   tenant    Tenant?     @relation(fields: [tenantId], references: [id])
+//   siteUsers SiteUser[]
+// }
+
+// SiteUser - many-to-many relationship between users and sites
+// model SiteUser {
+//   id        String   @id @default(cuid())
+//   role      UserRole @default(NORMAL)
+//   createdAt DateTime @default(now())
+//   
+//   // Relations
+//   userId    String
+//   user      User     @relation(fields: [userId], references: [id])
+//   siteId    String
+//   site      Site     @relation(fields: [siteId], references: [id])
+//   
+//   @@unique([userId, siteId])
+// }
+
+// User roles enum
+// enum UserRole {
+//   ADMIN
+//   NORMAL
+// }
