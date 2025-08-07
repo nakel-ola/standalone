@@ -29,7 +29,18 @@ export function AuthCard({ title, children }: AuthCardProps) {
               "0px 1px 3px 0px #0000000D, 0px 10px 15px -5px #0000001A, 0px 7px 7px -5px #0000000A",
           }}
         >
-          <h1 className="text-2xl font-bold text-gray-900 mb-6 text-left">
+          <h1
+            className="mb-6 text-left"
+            style={{
+              color: "#5774A8",
+              fontFamily: "Roboto",
+              fontWeight: 400,
+              fontStyle: "normal",
+              fontSize: "16px",
+              lineHeight: "18px",
+              letterSpacing: "0%",
+            }}
+          >
             {title}
           </h1>
 
