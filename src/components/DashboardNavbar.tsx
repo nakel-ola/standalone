@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronDown, User, Settings, LogOut } from "lucide-react";
+import { ChevronDown, User, LogOut } from "lucide-react";
 import { useSessionStore } from "@/lib/useSessionStore";
 import Image from "next/image";
 
@@ -21,12 +21,7 @@ export const DashboardNavbar = () => {
   };
 
   const handleProfile = () => {
-    console.log("Navigate to profile");
-    setIsDropdownOpen(false);
-  };
-
-  const handleSettings = () => {
-    console.log("Navigate to settings");
+    router.push("/dashboard/account-settings");
     setIsDropdownOpen(false);
   };
 
@@ -38,25 +33,14 @@ export const DashboardNavbar = () => {
     return user.firstName[0].toUpperCase();
   };
 
-  const getUserName = () => {
-    if (user?.firstName && user?.lastName) {
-      return `${user.firstName} ${user.lastName}`;
-    }
-    return user?.firstName || "User";
-  };
-
-  const getUserEmail = () => {
-    return user?.email || "user@example.com";
-  };
-
   return (
     <header className="h-16 bg-white border-b border-[#DEEFFF] flex items-center justify-between px-6">
       {/* Left side - Logo */}
       <div className="flex items-center space-x-4">
-        <Image 
-          src="/shortpoint-logo.svg" 
-          alt="ShortPoint Logo" 
-          width={160} 
+        <Image
+          src="/shortpoint-logo.svg"
+          alt="ShortPoint Logo"
+          width={160}
           height={32}
           className="h-8 w-auto"
         />
@@ -82,9 +66,9 @@ export const DashboardNavbar = () => {
           </div>
 
           {/* Dropdown Icon */}
-          <ChevronDown 
+          <ChevronDown
             className={`h-4 w-4 text-[#5774A8] transition-transform duration-200 ${
-              isDropdownOpen ? 'rotate-180' : ''
+              isDropdownOpen ? "rotate-180" : ""
             }`}
           />
         </button>
@@ -93,30 +77,13 @@ export const DashboardNavbar = () => {
         {isDropdownOpen && (
           <>
             {/* Backdrop */}
-            <div 
-              className="fixed inset-0 z-10" 
+            <div
+              className="fixed inset-0 z-10"
               onClick={() => setIsDropdownOpen(false)}
             />
-            
+
             {/* Dropdown Content */}
             <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-20">
-              {/* User Info Section */}
-              <div className="px-4 py-3 border-b border-gray-100">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-[#92F3CA] flex items-center justify-center text-white font-semibold text-sm">
-                    {getUserInitials()}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900 truncate">
-                      {getUserName()}
-                    </p>
-                    <p className="text-sm text-gray-500 truncate">
-                      {getUserEmail()}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
               {/* Menu Items */}
               <div className="py-1">
                 <button
@@ -124,25 +91,17 @@ export const DashboardNavbar = () => {
                   className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                 >
                   <User className="h-4 w-4 mr-3 text-gray-400" />
-                  Profile
+                  Account
                 </button>
-                
-                <button
-                  onClick={handleSettings}
-                  className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                >
-                  <Settings className="h-4 w-4 mr-3 text-gray-400" />
-                  Settings
-                </button>
-                
+
                 <hr className="my-1 border-gray-100" />
-                
+
                 <button
                   onClick={handleLogout}
                   className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
                 >
                   <LogOut className="h-4 w-4 mr-3 text-red-500" />
-                  Sign out
+                  Log out
                 </button>
               </div>
             </div>
