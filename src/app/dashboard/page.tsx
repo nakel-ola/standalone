@@ -11,43 +11,43 @@ const mockSites = [
   {
     id: 1,
     name: "HR Portal",
-    url: "hr.company.com",
-    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop&q=80",
+    url: "hr-portal.shortpoint.com",
+    image: "https://uploads-ssl.webflow.com/609271b0da3e568608217f2c/61f2c2dbd5800353cc2324ef_D-Intranet%20layout%201-min.png",
     description: "Human Resources management and employee portal"
   },
   {
     id: 2,
     name: "Finance Dashboard", 
     url: "finance.company.com",
-    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop&q=80",
+    image: "https://uploads-ssl.webflow.com/609271b0da3e568608217f2c/61f26f25d6560ebee90709f3_D-Together-min.png",
     description: "Financial reporting and budget management"
   },
   {
     id: 3,
     name: "Development Team",
-    url: "dev.company.com", 
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop&q=80",
+    url: "dev-team.shortpoint.com", 
+    image: "https://uploads-ssl.webflow.com/609271b0da3e568608217f2c/61f7255f8cc1ed833a0cacd3_Education%205-min.png",
     description: "Developer resources and project management"
   },
   {
     id: 4,
     name: "Sales Team",
     url: "sales.company.com",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&q=80", 
+    image: "https://uploads-ssl.webflow.com/609271b0da3e568608217f2c/61f711fcc6a3ac5c9457473e_Airlines%202-min.png",
     description: "Sales tracking and customer relationship management"
   },
   {
     id: 5,
     name: "Marketing Hub",
-    url: "marketing.company.com",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop&q=80",
+    url: "marketing-hub.shortpoint.com",
+    image: "https://uploads-ssl.webflow.com/609271b0da3e568608217f2c/61f70ea80602e381f93abaca_Social%20Layout%201-min.png",
     description: "Marketing campaigns and brand management"
   },
   {
     id: 6,
     name: "Customer Support",
-    url: "support.company.com", 
-    image: "https://images.unsplash.com/photo-1556761175-4b46a572b786?w=400&h=300&fit=crop&q=80",
+    url: "support.company.com",
+    image: "https://www.shortpoint.com/wp-content/uploads/2021/09/healthcare-4.png",
     description: "Help desk and customer service portal"
   }
 ];
@@ -59,6 +59,15 @@ export default function DashboardPage() {
 
   const handleNavigation = (path: string) => {
     router.push(path);
+  };
+
+  const handleSiteClick = (siteId: number) => {
+    router.push(`/sites/${siteId}`);
+  };
+
+  const handleCreateSiteClick = () => {
+    console.log("Create new site clicked");
+    // TODO: Navigate to create site page or open modal
   };
 
   useEffect(() => {
@@ -167,7 +176,10 @@ export default function DashboardPage() {
           {/* Second Section - Site Cards Grid */}
           <div className="flex flex-wrap gap-6">
             {/* Create New Site Card */}
-            <div className="w-64 bg-white rounded-lg border border-[#EAEAEA] hover:shadow-md transition-shadow cursor-pointer">
+            <div 
+              onClick={handleCreateSiteClick}
+              className="w-64 bg-white rounded-lg border border-[#EAEAEA] hover:shadow-md transition-shadow cursor-pointer"
+            >
               <div className="p-4">
                 <div className="h-48 bg-[#F9F9F9] border border-[#EAEAEA] rounded-lg flex items-center justify-center">
                   <svg className="w-8 h-8 text-[#5774A8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -184,6 +196,7 @@ export default function DashboardPage() {
             {mockSites.map((site) => (
               <div 
                 key={site.id}
+                onClick={() => handleSiteClick(site.id)}
                 className="w-64 bg-white rounded-lg border border-[#EAEAEA] hover:shadow-md transition-shadow cursor-pointer"
               >
                 <div className="p-4">

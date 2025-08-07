@@ -25,6 +25,10 @@ export const DashboardNavbar = () => {
     setIsDropdownOpen(false);
   };
 
+  const handleLogoClick = () => {
+    router.push("/dashboard");
+  };
+
   const getUserInitials = () => {
     if (!user?.firstName) return "U";
     if (user.firstName && user.lastName) {
@@ -37,13 +41,19 @@ export const DashboardNavbar = () => {
     <header className="h-16 bg-white border-b border-[#DEEFFF] flex items-center justify-between px-6">
       {/* Left side - Logo */}
       <div className="flex items-center space-x-4">
-        <Image
-          src="/shortpoint-logo.svg"
-          alt="ShortPoint Logo"
-          width={160}
-          height={32}
-          className="h-8 w-auto"
-        />
+        <button
+          onClick={handleLogoClick}
+          className="hover:opacity-80 transition-opacity cursor-pointer"
+          aria-label="Go to dashboard"
+        >
+          <Image 
+            src="/shortpoint-logo.svg" 
+            alt="ShortPoint Logo" 
+            width={160} 
+            height={32}
+            className="h-8 w-auto"
+          />
+        </button>
       </div>
 
       {/* Right side - User Profile */}
