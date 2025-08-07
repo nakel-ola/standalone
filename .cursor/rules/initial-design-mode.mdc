@@ -1,0 +1,86 @@
+---
+description: Apply this rule when in prototyping/mockup phase - focus on frontend UI development using mock data without backend connections
+globs: 
+alwaysApply: false
+---
+
+# Initial Design/Prototyping Mode
+
+## Core Principles
+- **PROTOTYPING MODE ACTIVE** - Focus on UI/UX development only
+- Develop frontend components and interfaces first
+- Use mock/dummy data instead of real backend connections
+- Prioritize user experience and visual design
+- Build functional navigation between components
+
+## Development Guidelines
+
+### Data Management
+- Use dummy JSON objects to represent data structures
+- Create mock data files in `src/mock/` or similar directory
+- Structure mock data to match eventual API responses
+- Use realistic sample data for better design validation
+
+### Frontend Development
+- **Link all components** for seamless navigation
+- Make all buttons and interactive elements **responsive**
+- Focus on component composition and reusability
+- Implement proper loading states with mock delays if needed
+
+### Backend Restrictions
+- **NO backend logic** implementation during this phase
+- **NO database connections** - use mock data only
+- **NO API integrations** - mock all external service calls
+- Save backend development for after UI implementation is complete
+
+### Component Structure
+```typescript
+// ✅ CORRECT: Using mock data
+const mockUsers = [
+  { id: '1', name: 'John Doe', email: 'john@example.com' },
+  { id: '2', name: 'Jane Smith', email: 'jane@example.com' }
+]
+
+// ✅ CORRECT: Mock API calls
+const fetchUsers = async () => {
+  // Simulate API delay
+  await new Promise(resolve => setTimeout(resolve, 500))
+  return mockUsers
+}
+
+// ❌ AVOID: Real database/API calls during prototyping
+// const users = await prisma.user.findMany()
+// const response = await fetch('/api/users')
+```
+
+## Mock Data Best Practices
+1. Create comprehensive mock datasets that cover edge cases
+2. Use realistic data that reflects actual use scenarios
+3. Include error states and empty states in mock responses
+4. Structure mock data to match planned database schema
+5. Document mock data structure for future backend implementation
+
+## UI/UX Focus Areas
+- **Responsive design** - ensure components work on all screen sizes
+- **Interactive feedback** - hover states, loading indicators, transitions
+- **Navigation flow** - logical user journey between pages/components
+- **Accessibility** - proper semantic HTML and ARIA attributes
+- **Visual consistency** - cohesive design system and styling
+
+## File Organization
+```
+src/
+├── components/     # Reusable UI components
+├── pages/         # Page-level components
+├── mock/          # Mock data files
+├── styles/        # Styling and themes
+└── types/         # TypeScript type definitions
+```
+
+## Transition Planning
+- Document component interfaces for future backend integration
+- Keep track of required API endpoints and data structures
+- Note authentication/authorization requirements for later implementation
+- Plan database schema based on mock data structures used
+
+Remember: The goal is to create a fully functional frontend prototype that demonstrates the complete user experience before implementing any backend logic.
