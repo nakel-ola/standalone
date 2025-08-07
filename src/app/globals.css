@@ -17,6 +17,8 @@
   --input: #e2e8f0;
   --ring: #2563eb;
   --radius: 0.5rem;
+  --card: #ffffff;
+  --card-foreground: #171717;
 }
 
 @theme inline {
@@ -35,6 +37,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -56,6 +60,8 @@
     --border: #334155;
     --input: #334155;
     --ring: #3b82f6;
+    --card: #1e293b;
+    --card-foreground: #f8fafc;
   }
 }
 
